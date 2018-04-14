@@ -41,6 +41,13 @@ public class Population {
     }
     
     public void sortRouteList(){
-        Collections.sort(routeList, (r1,r2) -> r1.getFitnessScore().compareTo(r2.getFitnessScore()));
+        routeList.sort((r1, r2) -> {           
+            int flag = 0;
+            if(r1.getFitnessScore() > r2.getFitnessScore())
+                flag = -1;
+            else if(r1.getFitnessScore() < r2.getFitnessScore())
+                flag = 1;
+            return flag;
+        });
     }
 }

@@ -35,7 +35,7 @@ public class TSP {
     }
     
     public void showPopulation(Population pop){
-        for(int i =0;i<pop.getRouteList().size()/2;i++){
+        for(int i =0;i<10;i++){
             for(Routes r : pop.getRouteList()){
                 System.out.print(r.toString() + " - Fitness: ");
                 System.out.print(r.getFitnessScore() + " - Distance: ");

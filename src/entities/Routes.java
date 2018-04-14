@@ -35,7 +35,7 @@ public class Routes {
 
     public Double getFitnessScore() {
         if(betterPath == true){
-            fitnessScore = (1/totalDistance()) * 8000;
+            fitnessScore = (1/totalDistance()) * 12000;
             betterPath = false;
         }
         return fitnessScore;

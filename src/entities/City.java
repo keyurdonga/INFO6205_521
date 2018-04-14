@@ -20,8 +20,8 @@ public class City {
 
     public City(String name, Double x, Double y){
         this.name = name;
-        this.lon = x * dtr;     
-        this.lat = y * dtr;
+        this.lat = x * dtr;     
+        this.lon = y * dtr;
     }
     
     public String getName() {
@@ -52,7 +52,7 @@ public class City {
         double deltaLon = this.lon - city.lon;
         double deltaLat = this.lat - city.lat;
         
-        double a = haversin(deltaLon) + Math.cos(this.lat) * Math.cos(city.lat) * haversin(deltaLat);
+        double a = haversin(deltaLat) + Math.cos(this.lat) * Math.cos(city.lat) * haversin(deltaLon);
         double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         return c * earth_radius;
     }
