@@ -5,6 +5,7 @@
  */
 package entities;
 
+import evolution.Breeding;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -24,6 +25,12 @@ public class Routes {
         Collections.shuffle(this.cityList);
     }
     
+    public Routes(Breeding br){
+        for(City c : br.getFirstRoute()){
+            cityList.add(null);
+        };
+    }
+    
     public ArrayList<City> getCityList() {
         betterPath = true;
         return cityList;
@@ -35,8 +42,8 @@ public class Routes {
 
     public Double getFitnessScore() {
         if(betterPath == true){
-            fitnessScore = (1/totalDistance()) * 12000;
             betterPath = false;
+            fitnessScore = 12000 * (1/totalDistance());
         }
         return fitnessScore;
     }
@@ -56,6 +63,7 @@ public class Routes {
         return dist;
     }
     
+    @Override
     public String toString(){
         String citiesOrder = "";
         

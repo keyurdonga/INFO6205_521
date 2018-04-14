@@ -28,8 +28,10 @@ public class Population {
         System.out.println(routeList.toString());
     }
 
-    public Population(int size, Breeding br) {
-        
+    public Population(int size, Breeding br) {        
+        for(int i=0 ;i<size;i++){
+            routeList.add(new Routes(br.getFirstRoute()));
+        }
     }
 
     public ArrayList<Routes> getRouteList() {

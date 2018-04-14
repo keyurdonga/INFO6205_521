@@ -7,6 +7,8 @@ package tsp;
 
 import entities.City;
 import entities.Routes;
+import evolution.Breeding;
+import static evolution.Breeding.generation_count;
 import java.util.ArrayList;
 import java.util.Arrays;
 import population.Population;
@@ -25,7 +27,24 @@ public class TSP {
         TSP tsp = new TSP();
         Population pop = new Population(tsp.list);
         pop.sortRouteList();
+        
+        
+        Breeding br = new Breeding(tsp.list);
+        int genCount = 1;
+        //tsp.printHeading(genCount++);
         tsp.showPopulation(pop);
+        while (genCount < generation_count) {
+            
+            genCount++;
+            pop = br.evolveIndividual(pop);
+            pop.sortRouteList();
+            
+        }
+        System.out.println("");
+        System.out.println("");
+        //main.printHeading(generation);
+        tsp.showPopulation(pop);
+        //main.drawGUI(pop);
     }
     
     public void result(Population res){
@@ -35,15 +54,13 @@ public class TSP {
     }
     
     public void showPopulation(Population pop){
-        for(int i =0;i<10;i++){
-            for(Routes r : pop.getRouteList()){
-                System.out.print(r.toString() + " - Fitness: ");
-                System.out.print(r.getFitnessScore() + " - Distance: ");
-                System.out.print(r.totalDistance());
-                System.out.println("");
-            }
+        for(Routes r : pop.getRouteList()){
+            System.out.print(r.toString() + " - Fitness: ");
+            System.out.print(r.getFitnessScore() + " - Distance: ");
+            System.out.print(r.totalDistance());
             System.out.println("");
         }
+        System.out.println("");
     }
     
 }
