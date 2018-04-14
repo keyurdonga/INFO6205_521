@@ -5,9 +5,11 @@
  */
 package evolution;
 
+import entities.City;
 import entities.Routes;
 import population.Population;
 import static tsp.Evaluate.top_route;
+import static tsp.Evaluate.tournament_size;
 
 /**
  *
@@ -31,8 +33,12 @@ public class Breeding {
     }
     
     public Population mutatePop(Population pop){
-        
-        return null;
+        for(Routes r:pop.getRouteList()){
+            if(pop.getRouteList().indexOf(r) >= top_route){
+                mutateRoute(r);
+            }
+        }
+        return pop;
     }
     
     public Population evolveIndividual(Population pop){
@@ -40,17 +46,40 @@ public class Breeding {
     }
     
     public Population tournamentPop(Population pop){
-        return null;
+        Population tPop = new Population(tournament_size, this);
+        for(int i=0;i<tournament_size;i++){
+            int rNum = (int) (pop.getRouteList().size() * Math.random());
+            tPop.getRouteList().set(i, pop.getRouteList().get(rNum));
+        }
+        tPop.sortRouteList();
+        return tPop;
     }
     
     public Routes crossbreedRoute(Routes r1, Routes r2){
+        Routes cbr = null;
+        int len = cbr.getCityList().size()/2;
+        for(int i=0;i<len;i++){
+            cbr.getCityList().set(i, r1.getCityList().get(i));
+        }
         
-        return null;
+        for(City c: r2.getCityList()){
+            if(!cbr.getCityList().contains(c)){
+                cbr.getCityList().add(c);
+            }
+        }
+        return cbr;
     }
     
     public Routes mutateRoute(Routes r){
-        
-        return null;
+        for(City c: r.getCityList()){
+            if(Math.random() < mRatio){
+                int rNum = (int) (Math.random() * r.getCityList().size());
+                City rCity = r.getCityList().get(rNum);
+                r.getCityList().set(r.getCityList().indexOf(c), rCity);
+                r.getCityList().set(rNum, c);                
+            }
+        }
+        return r;
     }
     
     
