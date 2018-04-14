@@ -18,7 +18,7 @@ import java.util.Comparator;
  */
 public class Population {
     
-    private static final int pop_size = 10;    
+    public static final int pop_size = 10;    
     private ArrayList<Routes> routeList = new ArrayList<>(pop_size);
     
     public Population(ArrayList<City> cl){
