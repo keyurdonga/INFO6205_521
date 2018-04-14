@@ -51,13 +51,13 @@ public class Routes {
         for(int i=0;i<citiesCount-1;i++){
             dist += this.cityList.get(i).CalculateDistance(this.cityList.get(i+1));
         }
-        dist += this.cityList.get(citiesCount).CalculateDistance(this.cityList.get(0));
+        dist += this.cityList.get(citiesCount-1).CalculateDistance(this.cityList.get(0));
         
         return dist;
     }
     
     public String toString(){
-        String citiesOrder = null;
+        String citiesOrder = "";
         
         for(City c:cityList){
             citiesOrder += c + " ";
