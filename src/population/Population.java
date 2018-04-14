@@ -25,6 +25,7 @@ public class Population {
         for(int i=0 ;i<pop_size;i++){
             routeList.add(new Routes(cl));
         }
+        System.out.println(routeList.toString());
     }
 
     public Population(int size, Breeding br) {
@@ -40,6 +41,6 @@ public class Population {
     }
     
     public void sortRouteList(){
-        Collections.sort(routeList, (Routes r1, Routes r2) -> r1.getFitnessScore().compareTo(r2.getFitnessScore()));
+        Collections.sort(routeList, (r1,r2) -> r1.getFitnessScore().compareTo(r2.getFitnessScore()));
     }
 }

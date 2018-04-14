@@ -6,6 +6,7 @@
 package tsp;
 
 import entities.City;
+import entities.Routes;
 import java.util.ArrayList;
 import java.util.Arrays;
 import population.Population;
@@ -22,7 +23,13 @@ public class TSP {
         // TODO code application logic here
         TSP tsp = new TSP();
         Population pop = new Population(tsp.list);
-                
+        pop.sortRouteList();
+    }
+    
+    public void result(Population res){
+        for(Routes r : res.getRouteList()){
+            System.out.println(Arrays.toString(r.getCityList().toArray()));
+        }
     }
     
     
