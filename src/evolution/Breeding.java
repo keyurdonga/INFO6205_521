@@ -19,7 +19,6 @@ public class Breeding {
     public static final double mRatio = 0.25;
     public static final int tournament_size = 4;
     public static final int top_route = 1;
-    public static final int generation_count = 200;
     
     public ArrayList<City> firstRoute = null;    
     
