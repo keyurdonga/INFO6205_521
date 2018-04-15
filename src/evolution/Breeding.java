@@ -16,7 +16,7 @@ import population.Population;
  */
 public class Breeding {
     
-    public static final double mRatio = 0.25;
+    public static final double mRatio = 0.020;
     public static final int tournament_size = 4;
     public static final int top_route = 1;
     
