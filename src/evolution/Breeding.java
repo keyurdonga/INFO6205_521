@@ -8,6 +8,7 @@ package evolution;
 import entities.City;
 import entities.Routes;
 import java.util.ArrayList;
+import java.util.concurrent.CompletableFuture;
 import population.Population;
 
 /**
@@ -16,9 +17,9 @@ import population.Population;
  */
 public class Breeding {
     
-    public static final double mRatio = 0.020;
-    public static final int tournament_size = 4;
-    public static final int top_route = 1;
+    public static final double mRatio = 0.15;
+    public static final int tournament_size = 100;
+    public static final int top_route = 2;
     
     public ArrayList<City> firstRoute = null;    
     
@@ -61,7 +62,36 @@ public class Breeding {
     }
     
     public Population evolveIndividual(Population pop){
-        return mutatePop(crossbreedPop(pop));
+        
+        Population cpy1 = pop; 
+        Population cpy2 = pop;         
+        
+        CompletableFuture<Population> p1 = parallelProcess(cpy1);
+        CompletableFuture<Population> p2 = parallelProcess(cpy2);
+        
+        CompletableFuture<Population> parallelProcess = p1.
+                    thenCombine(p2, (pop1, pop2) -> {
+                        
+                        pop1.sortRouteList();
+                        pop2.sortRouteList();
+                        
+                        Population combinedPop = new Population(pop1.getRouteList().size(),this);
+                        int num = 0;
+                        for(int i=0;i<Math.floor(pop1.getRouteList().size()/2);i++){
+                            combinedPop.getRouteList().set(num++, pop1.getRouteList().get(i));
+                            combinedPop.getRouteList().set(num++, pop2.getRouteList().get(i));
+                        }                        
+                        return combinedPop;
+                    });
+        return parallelProcess.join();        
+    }
+    
+    private CompletableFuture<Population> parallelProcess(Population pop) {
+        return CompletableFuture.supplyAsync(
+            () -> {
+                return mutatePop(crossbreedPop(pop));
+            }
+        );
     }
     
     public Population tournamentPop(Population pop){
@@ -77,7 +107,7 @@ public class Breeding {
     public Routes crossbreedRoute(Routes r1, Routes r2){
         Routes cbr = new Routes(this);
         int len = cbr.getCityList().size()/2;
-        for(int i=0;i<len;i++){
+        for(int i=1;i<=len;i++){
             cbr.getCityList().set(i, r1.getCityList().get(i));
         }        
         for(City c: r2.getCityList()){
