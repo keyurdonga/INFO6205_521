@@ -7,7 +7,6 @@ package entities;
 
 import evolution.Breeding;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 
 /**

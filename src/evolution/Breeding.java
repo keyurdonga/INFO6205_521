@@ -17,9 +17,9 @@ import population.Population;
  */
 public class Breeding {
     
-    public static final double mRatio = 0.15;
-    public static final int tournament_size = 100;
-    public static final int top_route = 2;
+    public static final double mutationRatio = 0.15;
+    public static final int tournament_size = 50;
+    public static final int top_route = 1;
     
     public ArrayList<City> firstRoute = null;    
     
@@ -71,7 +71,6 @@ public class Breeding {
         
         CompletableFuture<Population> parallelProcess = p1.
                     thenCombine(p2, (pop1, pop2) -> {
-                        
                         pop1.sortRouteList();
                         pop2.sortRouteList();
                         
@@ -125,7 +124,7 @@ public class Breeding {
     
     public Routes mutateRoute(Routes route){
         for(City c: route.getCityList()){
-            if(Math.random() < mRatio){
+            if(Math.random() < mutationRatio){
                 int rNum = (int) (Math.random() * route.getCityList().size());
                 City rCity = route.getCityList().get(rNum);
                 route.getCityList().set(route.getCityList().indexOf(c), rCity);

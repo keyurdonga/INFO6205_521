@@ -25,15 +25,21 @@ public class Population {
         for(int i=0 ;i<pop_size;i++){
             routeList.add(new Routes(cl));
         }
+    }
+    
+    public Population(int size, ArrayList<City> cl){
+        for(int i=0 ;i<size;i++){
+            routeList.add(new Routes(cl));
+        }
         System.out.println(routeList.toString());
     }
-
+    
     public Population(int size, Breeding br) {        
         for(int i=0 ;i<size;i++){
             routeList.add(new Routes(br.getFirstRoute()));
         }
     }
-
+    
     public ArrayList<Routes> getRouteList() {
         return routeList;
     }
