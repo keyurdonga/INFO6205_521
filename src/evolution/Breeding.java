@@ -82,7 +82,7 @@ public class Breeding {
                         }                        
                         return combinedPop;
                     });
-        return parallelProcess.join();        
+        return parallelProcess.join();       
     }
     
     private CompletableFuture<Population> parallelProcess(Population pop) {
